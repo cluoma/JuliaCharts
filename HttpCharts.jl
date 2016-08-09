@@ -32,10 +32,10 @@ function line_chart(resource::AbstractString)
   x = map(x->parse(Float64,x),split(x, ','))
   y = map(x->parse(Float64,x),split(y, ','))
 
-  # my_buf = IOBuffer()
-  # my_plot = plot(x, y);
-  # writemime(my_buf, "image/png", my_plot)
-  # takebuf_array(my_buf)
+  my_buf = IOBuffer()
+  my_plot = plot(x, y);
+  writemime(my_buf, "image/png", my_plot)
+  takebuf_array(my_buf)
 end
 
 http = HttpHandler() do req::Request, res::Response
