@@ -1,7 +1,7 @@
 # A basic HTTP api for generating charts using Julia
 #
 # Copyright Colin Luoma 2016
-# 
+#
 # BSD License
 
 using HttpServer, HttpCommon, Plots
@@ -23,19 +23,19 @@ end
 
 function line_chart(resource::AbstractString)
   # X values
-  m = match(r"x=([0-9],*)+", resource)
+  m = match(r"x=([0-9.],*)+", resource)
   x = m.match[3:length(m.match)]
   # Y values
-  m = match(r"y=([0-9],*)+", resource)
+  m = match(r"y=([0-9.],*)+", resource)
   y = m.match[3:length(m.match)]
 
   x = map(x->parse(Float64,x),split(x, ','))
   y = map(x->parse(Float64,x),split(y, ','))
 
-  my_buf = IOBuffer()
-  my_plot = plot(x, y);
-  writemime(my_buf, "image/png", my_plot)
-  takebuf_array(my_buf)
+  # my_buf = IOBuffer()
+  # my_plot = plot(x, y);
+  # writemime(my_buf, "image/png", my_plot)
+  # takebuf_array(my_buf)
 end
 
 http = HttpHandler() do req::Request, res::Response
