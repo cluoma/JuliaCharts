@@ -23,10 +23,10 @@ end
 
 function line_chart(resource::AbstractString)
   # X values
-  m = match(r"x=([0-9.],*)+", resource)
+  m = match(r"x=((-)?[0-9.],*)+", resource)
   x = m.match[3:length(m.match)]
   # Y values
-  m = match(r"y=([0-9.],*)+", resource)
+  m = match(r"y=((-)?[0-9.],*)+", resource)
   y = m.match[3:length(m.match)]
 
   x = map(x->parse(Float64,x),split(x, ','))
